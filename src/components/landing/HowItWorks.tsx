@@ -1,3 +1,4 @@
+import React from "react";
 import { SignUpButton } from "@clerk/nextjs";
 import { ArrowRightIcon, ZapIcon } from "lucide-react";
 import Image from "next/image";
