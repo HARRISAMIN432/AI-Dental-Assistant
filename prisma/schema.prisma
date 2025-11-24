@@ -3,38 +3,37 @@ generator client {
   output   = "../src/generated"
 }
 
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id          String        @id @default(cuid())
-  clerkId     String        @unique
-  email       String        @unique
-  firstName   String?
-  lastName    String?
-  phone       String?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id           String        @id @default(cuid())
+  clerkId      String        @unique
+  email        String        @unique
+  firstName    String?
+  lastName     String?
+  phone        String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
   appointments Appointment[]
 
   @@map("users")
 }
 
 model Doctor {
-  id          String        @id @default(cuid())
-  name        String
-  email       String        @unique
-  specialty   String
-  phone       String
-  bio         String?
-  imageUrl    String
-  gender      Gender
-  isActive    Boolean       @default(true)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  specialty    String
+  phone        String
+  bio          String?
+  imageUrl     String
+  gender       Gender
+  isActive     Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
   appointments Appointment[]
 
   @@map("doctors")

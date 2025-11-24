@@ -6,10 +6,16 @@ import WhatToAsk from "../components/landing/WhatToAsk";
 import PricingSection from "../components/landing/PricingSection";
 import CTA from "../components/landing/CTA";
 import Footer from "../components/landing/Footer";
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import UserSync from "@/components/UserSync";
 
-const Home: React.FC = () => {
+const Home: React.FC = async () => {
+  const user = await currentUser();
+  if (user) redirect("/dashboard");
   return (
     <div className="min-h-screen bg-background">
+      <UserSync />
       <Header />
       <Hero />
       <HowItWorks />
