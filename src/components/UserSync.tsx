@@ -2,9 +2,9 @@
 
 import { syncUser } from "@/lib/actions/users";
 import { useUser } from "@clerk/nextjs";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
-function UserSync() {
+const UserSync: React.FC = () => {
   const { isSignedIn, isLoaded } = useUser();
 
   useEffect(() => {
@@ -22,6 +22,6 @@ function UserSync() {
   }, [isLoaded, isSignedIn]);
 
   return null;
-}
+};
 
 export default UserSync;

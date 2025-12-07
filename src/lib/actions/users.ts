@@ -2,8 +2,9 @@
 
 import { currentUser } from "@clerk/nextjs/server";
 import { prisma } from "../prisma";
+import { User as PrismaUser } from "@/generated/client";
 
-export async function syncUser() {
+export async function syncUser(): Promise<PrismaUser | void> {
   try {
     const user = await currentUser();
     if (!user) return;
@@ -11,20 +12,21 @@ export async function syncUser() {
     const existingUser = await prisma.user.findUnique({
       where: { clerkId: user.id },
     });
+
     if (existingUser) return existingUser;
 
     const dbUser = await prisma.user.create({
       data: {
         clerkId: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.emailAddresses[0].emailAddress,
-        phone: user.phoneNumbers[0]?.phoneNumber,
+        firstName: user.firstName ?? "",
+        lastName: user.lastName ?? "",
+        email: user.emailAddresses?.[0]?.emailAddress ?? "",
+        phone: user.phoneNumbers?.[0]?.phoneNumber ?? null,
       },
     });
 
     return dbUser;
   } catch (error) {
-    console.log("Error in syncUser server action", error);
+    console.error("Error in syncUser server action:", error);
   }
 }

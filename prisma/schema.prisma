@@ -26,7 +26,7 @@ model Doctor {
   id           String        @id @default(cuid())
   name         String
   email        String        @unique
-  specialty    String
+  speciality   String
   phone        String
   bio          String?
   imageUrl     String
