@@ -139,7 +139,7 @@ function DoctorsManagement() {
       />
 
       <EditDoctorDialog
-        key={selectedDoctor?.id} // advanced react
+        key={selectedDoctor?.id}
         isOpen={isEditDialogOpen}
         onClose={handleCloseEditDialog}
         doctor={selectedDoctor}
